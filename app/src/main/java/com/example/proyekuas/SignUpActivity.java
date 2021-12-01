@@ -10,12 +10,17 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyekuas.Room.Database.DatabaseAkun;
 import com.example.proyekuas.Room.Entity.Akun;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpActivity extends AppCompatActivity {
     ImageView arrow;
@@ -23,11 +28,14 @@ public class SignUpActivity extends AppCompatActivity {
     RadioGroup radioGroup;
     MaterialButton cancel, signup;
     String jenisKelamin;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        mAuth = FirebaseAuth.getInstance();
 
         arrow = findViewById(R.id.arrow);
         judul = findViewById(R.id.judul);
@@ -127,7 +135,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             protected  void onPostExecute(Void unused) {
                 super.onPostExecute(unused);
-                Toast.makeText(SignUpActivity.this, "Berhasil Sign Up", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUpActivity.this, "Register Berhasil. Tolong cek email untuk verifikasi", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
                 finish();
             }
@@ -154,11 +162,38 @@ public class SignUpActivity extends AppCompatActivity {
                 if(check) {
                     Toast.makeText(SignUpActivity.this, "Username atau Email sudah ada!", Toast.LENGTH_SHORT).show();
                 } else {
-                    addAkun(jenisKelamin);
+                    createUser();
                 }
             }
         }
         CheckAkun checkAkun = new CheckAkun();
         checkAkun.execute();
+    }
+
+    public void createUser() {
+        String emailAuth = email.getText().toString();
+        String passwordAuth = password.getText().toString();
+        mAuth.createUserWithEmailAndPassword(emailAuth, passwordAuth)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()) {
+                                        addAkun(jenisKelamin);
+                                    } else {
+                                        Toast.makeText(SignUpActivity.this, task.getException().getMessage(),
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        } else {
+                            Toast.makeText(SignUpActivity.this, task.getException().getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }

@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.example.proyekuas.SharedPreferences.Entity.User;
 import com.example.proyekuas.SharedPreferences.Preferences.UserPreferences;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class FragmentProfile extends Fragment {
     TextView judul, nama, jenisKelamin, umur, alamat, email, noTelp, username, jenisKamar;
@@ -22,6 +23,7 @@ public class FragmentProfile extends Fragment {
     MaterialButton logout;
     private User user;
     private UserPreferences userPreferences;
+    private FirebaseAuth mAuth;
 
     public FragmentProfile() {
         // Required empty public constructor
@@ -37,6 +39,7 @@ public class FragmentProfile extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
         userPreferences = new UserPreferences(getContext());
         logout = view.findViewById(R.id.btnLogout);
 
@@ -69,6 +72,7 @@ public class FragmentProfile extends Fragment {
             @Override
             public void onClick(View view) {
                 userPreferences.logout();
+                mAuth.signOut();
                 checkLogin();
             }
         });

@@ -19,19 +19,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.proyekuas.Room.Database.DatabaseAkun;
 import com.example.proyekuas.Room.Entity.Akun;
 import com.example.proyekuas.SharedPreferences.Preferences.UserPreferences;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
     TextView here;
     MaterialButton btnlogin;
     private TextInputLayout username, password;
     private UserPreferences userPreferences;
+    private FirebaseAuth mAuth;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        mAuth = FirebaseAuth.getInstance();
         userPreferences = new UserPreferences(LoginActivity.this);
 
         here = findViewById(R.id.here);
@@ -99,12 +104,26 @@ public class LoginActivity extends AppCompatActivity {
                 if(akun == null) {
                     Toast.makeText(LoginActivity.this, "Akun tidak terdaftar!", Toast.LENGTH_SHORT).show();
                 } else {
-                    /* Set user to sharedPreferences */
-                    userPreferences.setLogin(akun.getNama(), akun.getJenisKelamin(), akun.getAlamat(), akun.getEmail(), akun.getNoTelp(), akun.getUsername(), akun.getPassword(), akun.getUmur(), akun.getTypeRoom());
-                    if(userPreferences.checkLogin()) {
-                        Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
-                        startActivity(intent);
-                    }
+                    mAuth.signInWithEmailAndPassword(akun.getEmail(), akun.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()) {
+                                if(mAuth.getCurrentUser().isEmailVerified()) {
+                                    userPreferences.setLogin(akun.getNama(), akun.getJenisKelamin(), akun.getAlamat(), akun.getEmail(), akun.getNoTelp(), akun.getUsername(), akun.getPassword(), akun.getUmur(), akun.getTypeRoom());
+                                    if(userPreferences.checkLogin()) {
+                                        Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+                                        startActivity(intent);
+                                    }
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "Tolong verifikasi email terlebih dahulu!",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(LoginActivity.this, task.getException().getMessage(),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
             }
         }
