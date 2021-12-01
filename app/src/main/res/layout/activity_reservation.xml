@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/parentReservation"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
+
+    <TextView
+        android:id="@+id/hiUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="@id/roomType"
+        android:text="Hi, Username\nComplete Your Data"
+        android:textColor="#2B92D5"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:id="@+id/roomType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/hiUser"
+        app:layout_constraintStart_toStartOf="@id/checkIn"
+        android:layout_marginTop="20dp"
+        android:text="Room Type"
+        android:textColor="#13548A"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/isiRoomType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:text="Room Type"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintStart_toEndOf="@id/roomType"
+        app:layout_constraintTop_toBottomOf="@id/hiUser" />
+
+        <EditText
+            android:id="@+id/checkIn"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/roomType"
+            app:layout_constraintStart_toStartOf="@id/roomType"
+            android:layout_marginTop="20dp"
+            android:hint="Check In Date"
+            android:focusable="false"
+            android:inputType="none"
+            android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+            android:cursorVisible="false"/>
+
+        <EditText
+            android:id="@+id/checkOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintTop_toBottomOf="@id/checkIn"
+            app:layout_constraintStart_toStartOf="@id/checkIn"
+            android:hint="Check Out Date"
+            android:focusable="false"
+            android:inputType="none"
+            android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+            android:cursorVisible="false"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/gambarKamar"
+        app:layout_constraintTop_toBottomOf="@id/checkOut"
+        app:layout_constraintStart_toStartOf="@id/checkOut"
+        app:layout_constraintEnd_toEndOf="@id/checkOut"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="20dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageRoom"
+            android:src="@drawable/kamarhotel"
+            android:scaleType="fitXY"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/gambarAntri"
+        app:layout_constraintTop_toBottomOf="@id/gambarKamar"
+        app:layout_constraintBottom_toTopOf="@id/submit"
+        app:layout_constraintStart_toStartOf="@id/gambarKamar"
+        app:layout_constraintEnd_toEndOf="@id/gambarKamar"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:src="@drawable/img_order"
+        android:scaleType="fitXY"
+        android:layout_marginTop="20dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginBottom="-7dp"
+        android:backgroundTint="#22597D"
+        android:text="SUBMIT"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

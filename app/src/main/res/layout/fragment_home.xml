@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".FragmentHome">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_baseline_person_24"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#13548A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/txtChoose"
+            app:layout_constraintStart_toStartOf="@id/txtChoose" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="Hai, Username!"
+            android:textColor="#13548A"
+            android:textSize="24dp"
+            app:layout_constraintStart_toEndOf="@id/profile"
+            app:layout_constraintTop_toTopOf="@+id/profile" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/ic_baseline_notifications_24"
+            app:layout_constraintBottom_toTopOf="@+id/txtChoose"
+            app:layout_constraintEnd_toEndOf="@id/txtChoose"
+            app:layout_constraintTop_toTopOf="@id/profile"
+            app:tint="#13548A" />
+
+        <TextView
+            android:id="@+id/txtChoose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Choose Your"
+            android:textColor="#13548A"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/profile" />
+
+        <TextView
+            android:id="@+id/txtFav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Favorite Room!"
+            android:textColor="#13548A"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/txtChoose" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_kamar"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginTop="15dp"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtFav"
+            tools:listitem="@layout/cardview_kamar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

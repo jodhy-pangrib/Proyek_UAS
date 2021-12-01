@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="namaProfil" type="id" />
+    <item name="isiNamaProfil" type="id" />
+    <item name="jenisKelaminProfil" type="id" />
+    <item name="isiJenisKelaminProfil" type="id" />
+    <item name="umurProfil" type="id" />
+    <item name="isiUmurProfil" type="id" />
+    <item name="alamatProfil" type="id" />
+    <item name="isiAlamatProfil" type="id" />
+    <item name="emailProfil" type="id" />
+    <item name="isiEmailProfil" type="id" />
+    <item name="teleponProfil" type="id" />
+    <item name="isiTeleponProfil" type="id" />
+    <item name="usernameProfil" type="id" />
+    <item name="isiUsernameProfil" type="id" />
+    <item name="jenisKamarProfil" type="id" />
+    <item name="isiJenisKamarProfil" type="id" />
+    <item name="hiUsernamePayment" type="id" />
+    <item name="namaPayment" type="id" />
+    <item name="isiNamaPayment" type="id" />
+    <item name="roomTypePayment" type="id" />
+    <item name="isiRoomTypePayment" type="id" />
+    <item name="checkInPayment" type="id" />
+    <item name="isiCheckInPayment" type="id" />
+    <item name="checkOutPayment" type="id" />
+    <item name="isiCheckOutPayment" type="id" />
+    <item name="totalPricePayment" type="id" />
+    <item name="isiTotalPricePayment" type="id" />
+    <item name="yourCashPayment" type="id" />
+    <item name="imagePayment" type="id" />
+</resources>

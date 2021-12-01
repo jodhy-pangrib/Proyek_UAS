@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Proyek UAS</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mapbox_access_token">pk.eyJ1Ijoiam9kaHktcGFuZ3JpYiIsImEiOiJja3Vwanl6c28wcDlwMm9tZGdjam1tMTZuIn0.ui7fp8KoPBhRz-JsVi_UhA</string>
+</resources>
