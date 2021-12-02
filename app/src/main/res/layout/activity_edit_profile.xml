@@ -20,6 +20,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/photoProfile"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -138,13 +139,29 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCancel"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="CANCEL"
+        android:textColor="#0D3658"
+        app:cornerRadius="15dp"
+        app:strokeWidth="2dp"
+        app:strokeColor="#0D3658"
+        app:layout_constraintStart_toStartOf="@id/inputLayoutUsername"
+        app:layout_constraintEnd_toStartOf="@id/btnSubmit"
+        app:layout_constraintEnd_toEndOf="@id/inputLayoutUsername"
+        app:layout_constraintTop_toBottomOf="@id/inputLayoutUsername"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSubmit"
-        android:layout_width="350dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:backgroundTint="#0D3658"
         android:text="SUBMIT"
         app:cornerRadius="15dp"
-        app:layout_constraintStart_toStartOf="@id/inputLayoutUsername"
+        app:layout_constraintStart_toEndOf="@id/btnCancel"
         app:layout_constraintEnd_toEndOf="@id/inputLayoutUsername"
         app:layout_constraintTop_toBottomOf="@id/inputLayoutUsername"
         app:layout_constraintBottom_toBottomOf="parent"/>
