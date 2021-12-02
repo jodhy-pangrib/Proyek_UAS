@@ -1,8 +1,11 @@
 package com.example.proyekuas;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -13,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.proyekuas.Room.Database.DatabaseAkun;
 import com.example.proyekuas.Room.Entity.Akun;
@@ -21,6 +25,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.io.ByteArrayOutputStream;
 
 public class SignUpActivity extends AppCompatActivity {
     ImageView arrow;
@@ -122,7 +128,13 @@ public class SignUpActivity extends AppCompatActivity {
         class AddTodo extends AsyncTask<Void, Void, Void> {
             @Override
             protected Void doInBackground(Void... voids) {
-                Akun akun = new Akun(name,gender,alamatUser,emailUser,telp,user,pass,Integer.parseInt(usia),typeRoom);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.profil);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream .toByteArray();
+                String image  = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+                Akun akun = new Akun(name,gender,alamatUser,emailUser,telp,user,pass,Integer.parseInt(usia),typeRoom, image);
 
                 DatabaseAkun.getInstance(SignUpActivity.this)
                         .getDatabase()
