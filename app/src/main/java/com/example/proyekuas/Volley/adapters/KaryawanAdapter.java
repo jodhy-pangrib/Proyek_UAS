@@ -93,8 +93,7 @@ public class KaryawanAdapter extends RecyclerView.Adapter<KaryawanAdapter.ViewHo
                         .setPositiveButton("Hapus", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                if (context instanceof FragmentKaryawan)
-                                    ((FragmentKaryawan) context).deleteKaryawan(karyawan.getId());
+
                             }
                         })
                         .show();
