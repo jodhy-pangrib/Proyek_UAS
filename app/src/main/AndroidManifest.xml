@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyekUTS">
         <activity
+            android:name=".AdminHome"
+            android:exported="false" />
+        <activity
             android:name=".EditProfile"
             android:exported="false" />
         <activity

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminHome">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/layout_fragment_admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/parentMain"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="#13548A"
+        app:menu="@menu/bottom_navigation_menu_admin"
+        app:layout_constraintBottom_toBottomOf="@id/parentMain"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
