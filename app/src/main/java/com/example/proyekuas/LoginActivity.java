@@ -101,7 +101,9 @@ public class LoginActivity extends AppCompatActivity {
             protected void onPostExecute(Akun akun) {
                 super.onPostExecute(akun);
 
-                if(akun == null) {
+                if(username.getEditText().getText().toString().trim().equals("admin") && password.getEditText().getText().toString().trim().equals("admin")) {
+                    startActivity(new Intent(LoginActivity.this, AdminHome.class));
+                } else if(akun == null) {
                     Toast.makeText(LoginActivity.this, "Akun tidak terdaftar!", Toast.LENGTH_SHORT).show();
                 } else {
                     mAuth.signInWithEmailAndPassword(akun.getEmail(), akun.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
