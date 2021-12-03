@@ -90,6 +90,12 @@ public class FragmentProfile extends Fragment {
                                 checkLogin();
                             }
                         })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
                         .show();
             }
         });
@@ -118,6 +124,7 @@ public class FragmentProfile extends Fragment {
             Intent intent = new Intent(getContext(),LoginActivity.class);
             startActivity(intent);
             getActivity().finish();
+            Toast.makeText(getContext(), "Berhasil Logout!", Toast.LENGTH_SHORT).show();
         }
     }
 

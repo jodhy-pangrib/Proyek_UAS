@@ -5,10 +5,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class AdminHome extends AppCompatActivity {
 
@@ -38,7 +40,15 @@ public class AdminHome extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //  Keluar dari aplikasi
-                            finishAndRemoveTask();
+                            startActivity(new Intent(AdminHome.this, LoginActivity.class));
+                            finish();
+                            Toast.makeText(AdminHome.this, "Berhasil Logout!", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
                         }
                     })
                     .show();

@@ -3,14 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/PERKULIAHAN/Semester 5/Pemrograman Berbasis Platform/Praktikum/Proyek UAS/app/src/main/res/layout/fragment_karyawan.xml" value="0.33" />
-        <entry key="..\:/PERKULIAHAN/Semester 5/Pemrograman Berbasis Platform/Praktikum/Proyek UAS/app/src/main/res/layout/fragment_reservasi.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/Documents/Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1" />
+        <entry key="..\:/Users/ASUS/Documents/Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/activity_admin_home.xml" value="0.268" />
         <entry key="..\:/Users/ASUS/Documents/Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/activity_edit_profile.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Documents/Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/activity_home.xml" value="0.184375" />
         <entry key="..\:/Users/ASUS/Documents/Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Documents/Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/activity_signup.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Documents/Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/ASUS/Documents/Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/fragment_karyawan.xml" value="0.184375" />
         <entry key="..\:/Users/ASUS/Documents/Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="..\:/Users/ASUS/Documents/Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/menu/bottom_navigation_menu_admin.xml" value="0.184375" />
         <entry key="..\:/Users/ASUS/Documents/Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/menu/logout.xml" value="0.184375" />
