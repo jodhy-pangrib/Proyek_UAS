@@ -11,17 +11,32 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.proyekuas.Room.Database.DatabaseAkun;
+import com.example.proyekuas.Room.Entity.Akun;
+import com.example.proyekuas.SharedPreferences.Entity.User;
+import com.example.proyekuas.SharedPreferences.Preferences.UserPreferences;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -33,12 +48,63 @@ public class EditProfile extends AppCompatActivity {
 
     private Bitmap bitmap = null;
     private CircleImageView photoProfile;
+    private User user;
+    private UserPreferences userPreferences;
+    TextInputLayout  nama, umur, alamat, telp, username;
+    TextView judul;
+    ImageView arrow;
+    MaterialButton cancel, submit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
+        userPreferences = new UserPreferences(EditProfile.this);
+
         photoProfile = findViewById(R.id.photoProfile);
+        nama = findViewById(R.id.inputLayoutNama);
+        umur = findViewById(R.id.inputLayoutUmur);
+        alamat = findViewById(R.id.inputLayoutAlamat);
+        telp = findViewById(R.id.inputLayoutNoTelp);
+        username = findViewById(R.id.inputLayoutUsername);
+        cancel = findViewById(R.id.btnCancel);
+        submit = findViewById(R.id.btnSubmit);
+        judul = findViewById(R.id.judul);
+        arrow = findViewById(R.id.arrow);
+
+        judul.setText("Edit Profil");
+        user = userPreferences.getUserLogin();
+        getAkun(user.getUsername(), user.getPassword());
+
+        arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(cekKosong()) {
+                    if(Integer.parseInt(umur.getEditText().getText().toString().trim())<18) {
+                        Toast.makeText(EditProfile.this, "Umur Tidak Cukup!", Toast.LENGTH_SHORT).show();
+                    } else if(telp.getEditText().getText().toString().trim().length()<10 || telp.getEditText().getText().toString().trim().length()>13) {
+                        Toast.makeText(EditProfile.this, "Nomor Hp 10-13 Digit!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        getUser(username.getEditText().getText().toString().trim());
+                    }
+                }
+            }
+        });
 
         photoProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +188,9 @@ public class EditProfile extends AppCompatActivity {
             bitmap = (Bitmap) data.getExtras().get("data");
         }
 
+        if(bitmap == null)
+            return;
+
         bitmap = getResizedBitmap(bitmap, 512);
         photoProfile.setImageBitmap(bitmap);
     }
@@ -149,5 +218,116 @@ public class EditProfile extends AppCompatActivity {
         byte[] byteArray = byteArrayOutputStream .toByteArray();
         String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
         return encoded;
+    }
+
+    public boolean cekKosong() {
+        if(nama.getEditText().getText().toString().trim().isEmpty()
+                || username.getEditText().getText().toString().trim().isEmpty()
+                || alamat.getEditText().getText().toString().trim().isEmpty()
+                || telp.getEditText().getText().toString().trim().isEmpty()
+                || umur.getEditText().getText().toString().trim().isEmpty()) {
+            Toast.makeText(EditProfile.this, "Data Masih Kosong!!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    public void getUser(String usernameProfil) {
+        class CheckUser extends AsyncTask<Void, Void, String> {
+            @Override
+            protected String doInBackground(Void... voids) {
+                String usernameTemp = DatabaseAkun.getInstance(EditProfile.this)
+                        .getDatabase()
+                        .akunDao()
+                        .getUser(usernameProfil);
+
+                return usernameTemp;
+            }
+
+            @Override
+            protected void onPostExecute(String userTemp) {
+                super.onPostExecute(userTemp);
+                if(userTemp != null) {
+                    if(userTemp.equals(user.getUsername())) {
+                        updateAkun();
+                    } else {
+                        Toast.makeText(EditProfile.this, "Username sudah ada!", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    updateAkun();
+                }
+            }
+        }
+        CheckUser checkUser = new CheckUser();
+        checkUser.execute();
+    }
+
+    private void updateAkun() {
+        BitmapDrawable drawable = (BitmapDrawable) photoProfile.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+        final String name = nama.getEditText().getText().toString();
+        final String usia = umur.getEditText().getText().toString();
+        final String alamatUser = alamat.getEditText().getText().toString();
+        final String noTelp = telp.getEditText().getText().toString();
+        final String usernama = username.getEditText().getText().toString();
+        final String image = bitmapToBase64(bitmap);
+
+        class UpdateAkun extends AsyncTask<Void, Void, Void> {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                DatabaseAkun.getInstance(EditProfile.this)
+                        .getDatabase()
+                        .akunDao()
+                        .updateProfil(name, Integer.parseInt(usia), alamatUser, noTelp, usernama, image, user.getEmail());
+
+                return null;
+            }
+
+            @Override
+            protected  void onPostExecute(Void unused) {
+                super.onPostExecute(unused);
+                userPreferences.setLogin(name, user.getJenisKelamin(), alamatUser, user.getEmail(), noTelp, usernama, user.getPassword(), Integer.parseInt(usia), user.getRoom());
+                user = userPreferences.getUserLogin();
+                Toast.makeText(EditProfile.this, "Update Profil Berhasil", Toast.LENGTH_SHORT).show();
+                Intent returnIntent = new Intent();
+                setResult(RESULT_OK, returnIntent);
+                finish();
+            }
+        }
+        UpdateAkun updateAkun = new UpdateAkun();
+        updateAkun.execute();
+    }
+
+    public void getAkun(String user, String password) {
+        class GetAkun extends AsyncTask<Void, Void, Akun> {
+            @Override
+            protected Akun doInBackground(Void... voids) {
+                Akun akun = DatabaseAkun.getInstance(EditProfile.this)
+                        .getDatabase()
+                        .akunDao()
+                        .login(user, password);
+
+                return akun;
+            }
+
+            @Override
+            protected void onPostExecute(Akun akun) {
+                super.onPostExecute(akun);
+                if(akun == null) {
+                    Toast.makeText(EditProfile.this, "Profil tidak ada!", Toast.LENGTH_SHORT).show();
+                } else {
+                    nama.getEditText().setText(akun.getNama());
+                    umur.getEditText().setText(String.valueOf(akun.getUmur()));
+                    alamat.getEditText().setText(akun.getAlamat());
+                    telp.getEditText().setText(akun.getNoTelp());
+                    username.getEditText().setText(akun.getUsername());
+                    byte[] bytes = Base64.decode(akun.getImage(),Base64.DEFAULT);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                    photoProfile.setImageBitmap(bitmap);
+                }
+            }
+        }
+        GetAkun getAkun = new GetAkun();
+        getAkun.execute();
     }
 }

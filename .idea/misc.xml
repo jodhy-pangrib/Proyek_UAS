@@ -3,10 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/activity_admin_home.xml" value="0.275" />
         <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/activity_edit_profile.xml" value="0.275" />
         <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/activity_final_page.xml" value="0.275" />
-        <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/activity_home.xml" value="0.2" />
+        <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/activity_home.xml" value="0.36666666666666664" />
         <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/activity_login.xml" value="0.275" />
         <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/activity_main.xml" value="0.275" />
         <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/activity_map.xml" value="0.275" />
@@ -14,13 +13,9 @@
         <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/activity_reservation.xml" value="0.275" />
         <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/activity_signup.xml" value="0.275" />
         <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/activity_splash.xml" value="0.275" />
-        <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/cardview_kamar.xml" value="0.275" />
         <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
         <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
         <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/layout_select_media.xml" value="0.275" />
-        <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/layout/toolbar.xml" value="0.275" />
-        <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.275" />
-        <entry key="..\:/Kuliah Semester 5/Pemrograman Berbasis Platform/Proyek_UAS/app/src/main/res/menu/bottom_navigation_menu_admin.xml" value="0.275" />
       </map>
     </option>
   </component>
