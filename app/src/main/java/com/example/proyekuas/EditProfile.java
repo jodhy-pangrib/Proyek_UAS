@@ -254,7 +254,11 @@ public class EditProfile extends AppCompatActivity {
                         Toast.makeText(EditProfile.this, "Username sudah ada!", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    updateAkun();
+                    if("admin".equals(username.getEditText().getText().toString().trim())) {
+                        Toast.makeText(EditProfile.this, "Username Tidak Dizinkan!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        updateAkun();
+                    }
                 }
             }
         }

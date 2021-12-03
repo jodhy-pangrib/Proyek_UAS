@@ -156,14 +156,14 @@ public class SignUpActivity extends AppCompatActivity {
         addTodo.execute();
     }
 
-    public void getAkun(String username, String email) {
+    public void getAkun(String user, String email) {
         class CheckAkun extends AsyncTask<Void, Void, Boolean> {
             @Override
             protected Boolean doInBackground(Void... voids) {
                 Boolean check = DatabaseAkun.getInstance(SignUpActivity.this)
                         .getDatabase()
                         .akunDao()
-                        .check(username, email);
+                        .check(user, email);
 
                 return check;
             }
@@ -174,7 +174,11 @@ public class SignUpActivity extends AppCompatActivity {
                 if(check) {
                     Toast.makeText(SignUpActivity.this, "Username atau Email sudah ada!", Toast.LENGTH_SHORT).show();
                 } else {
-                    createUser();
+                    if("admin".equals(username.getText().toString().trim())) {
+                        Toast.makeText(SignUpActivity.this, "Username Tidak Dizinkan!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        createUser();
+                    }
                 }
             }
         }

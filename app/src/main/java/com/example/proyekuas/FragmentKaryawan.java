@@ -28,12 +28,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.proyekuas.SharedPreferences.Preferences.UserPreferences;
+import com.example.proyekuas.Volley.Method;
 import com.example.proyekuas.Volley.adapters.KaryawanAdapter;
 import com.example.proyekuas.Volley.api.KaryawanApi;
 import com.example.proyekuas.Volley.models.KaryawanResponse;
-import com.example.proyekuas.dataBinding.DataKamarHotel;
-import com.example.proyekuas.dataBinding.RecyclerViewAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
@@ -44,7 +42,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FragmentKaryawan extends Fragment {
+public class FragmentKaryawan extends Fragment  {
 
     public static final int LAUNCH_ADD_ACTIVITY = 123;
 
@@ -98,8 +96,13 @@ public class FragmentKaryawan extends Fragment {
         });
 
         RecyclerView rvKaryawan = view.findViewById(R.id.rv_karyawan);
-        adapter = new KaryawanAdapter(new ArrayList<>(), getContext());
-        rvKaryawan.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        adapter = new KaryawanAdapter(new ArrayList<>(), getActivity(), new Method() {
+            @Override
+            public void delete(long id) {
+                deleteKaryawan(id);
+            }
+        });
+        rvKaryawan.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         rvKaryawan.setAdapter(adapter);
 
         getAllKaryawan();
@@ -125,7 +128,7 @@ public class FragmentKaryawan extends Fragment {
                 adapter.setKaryawanList(karyawanResponse.getKaryawanList());
                 adapter.getFilter().filter(svKaryawan.getQuery());
 
-                Toast.makeText(getContext(), karyawanResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), karyawanResponse.getMessage(), Toast.LENGTH_LONG).show();
 
                 srKaryawan.setRefreshing(false);
             }
@@ -158,7 +161,7 @@ public class FragmentKaryawan extends Fragment {
         queue.add(stringRequest);
     }
 
-    public void deleteMahasiswa(long id) {
+    public void deleteKaryawan(long id) {
         setLoading(true);
 
         StringRequest stringRequest = new StringRequest(DELETE, KaryawanApi.DELETE_URL + id, new Response.Listener<String>() {

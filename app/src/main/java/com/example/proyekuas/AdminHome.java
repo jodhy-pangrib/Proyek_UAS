@@ -3,6 +3,7 @@ package com.example.proyekuas;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,7 +13,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class AdminHome extends AppCompatActivity {
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +24,31 @@ public class AdminHome extends AppCompatActivity {
         setContentView(R.layout.activity_admin_home);
 
         setTitle("Admin");
+        changeFragment(new FragmentKaryawan());
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(navigation);
+    }
+    private BottomNavigationView.OnNavigationItemSelectedListener navigation =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.home:
+                            changeFragment(new FragmentKaryawan());
+                            break;
+                        case R.id.todoList:
+                            changeFragment(new FragmentReservasi());
+                            break;
+                    }
+                    return true;
+                }
+            };
+
+    public void changeFragment(Fragment fragment){
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.layout_fragment_admin,fragment)
+                .commit();
     }
 
     @Override
