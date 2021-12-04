@@ -59,7 +59,7 @@ public class ReservationActivity extends AppCompatActivity {
 
         userPreferences = new UserPreferences(ReservationActivity.this);
         user = userPreferences.getUserLogin();
-        dateFormatter = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+        dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
         hiUser.setText("Hi, "+user.getNama()+"\nComplete Your Data");
         judul.setText("Reservation");
@@ -113,7 +113,7 @@ public class ReservationActivity extends AppCompatActivity {
                     if(checkkIn.isEmpty() || checkkOut.isEmpty()) {
                         Toast.makeText(ReservationActivity.this, "Isi Tanggal Dulu!!!",Toast.LENGTH_SHORT).show();
                     } else {
-                        SimpleDateFormat dateFormatterCheck = new SimpleDateFormat("dd/MM/yyyy");
+                        SimpleDateFormat dateFormatterCheck = new SimpleDateFormat("yyyy-MM-dd");
 
                         Date tempCurrent = Calendar.getInstance().getTime();
                         String formatCurrent = dateFormatterCheck.format(tempCurrent);

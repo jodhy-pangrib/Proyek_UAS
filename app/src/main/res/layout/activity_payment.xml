@@ -177,4 +177,9 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="205dp" />
 
+    <include
+        android:id="@+id/layout_loading"
+        layout="@layout/layout_loading"
+        android:visibility="gone" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
