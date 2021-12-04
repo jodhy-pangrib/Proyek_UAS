@@ -116,7 +116,7 @@ public class AddEditKaryawan extends AppCompatActivity {
                 Karyawan karyawan = karyawanResponse.getKaryawan();
                 etNama.setText(karyawan.getNama_karyawan());
                 etNoKaryawan.setText(karyawan.getNomor_karyawan());
-                etUmur.setText(karyawan.getUmur());
+                etUmur.setText(String.valueOf(karyawan.getUmur()));
                 edJenisKelamin.setText(karyawan.getJenis_kelamin(), false);
                 edRole.setText(karyawan.getRole(), false);
 

@@ -151,7 +151,6 @@ public class PaymentActivity extends AppCompatActivity {
     public void createReservasi() {
         setLoading(true);
         String[] total = harga.getText().toString().trim().split(" ");
-        System.out.println("Hasil : "+total[1]);
 
         Reservasi reservasi = new Reservasi(
                 nama.getText().toString().trim(),
