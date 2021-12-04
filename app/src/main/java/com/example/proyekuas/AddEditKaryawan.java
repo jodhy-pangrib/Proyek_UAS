@@ -155,10 +155,15 @@ public class AddEditKaryawan extends AppCompatActivity {
     private void createKaryawan() {
         setLoading(true);
 
+        Integer umur = null;
+        if(!etUmur.getText().toString().isEmpty()) {
+            umur = Integer.valueOf(etUmur.getText().toString());
+        }
+
         Karyawan karyawan = new Karyawan(
                 etNama.getText().toString(),
                 etNoKaryawan.getText().toString(),
-                Integer.valueOf(etUmur.getText().toString()),
+                umur,
                 edJenisKelamin.getText().toString(),
                 edRole.getText().toString()
         );

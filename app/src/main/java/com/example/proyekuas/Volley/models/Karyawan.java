@@ -4,11 +4,11 @@ public class Karyawan {
     private Long id;
     private String nama_karyawan;
     private String nomor_karyawan;
-    private int umur;
+    private Integer umur;
     private String jenis_kelamin;
     private String role;
 
-    public Karyawan(String nama_karyawan, String nomor_karyawan, int umur, String jenis_kelamin, String role) {
+    public Karyawan(String nama_karyawan, String nomor_karyawan, Integer umur, String jenis_kelamin, String role) {
         this.nama_karyawan = nama_karyawan;
         this.nomor_karyawan = nomor_karyawan;
         this.umur = umur;
@@ -40,11 +40,11 @@ public class Karyawan {
         this.nomor_karyawan = nomor_karyawan;
     }
 
-    public int getUmur() {
+    public Integer getUmur() {
         return umur;
     }
 
-    public void setUmur(int umur) {
+    public void setUmur(Integer umur) {
         this.umur = umur;
     }
 

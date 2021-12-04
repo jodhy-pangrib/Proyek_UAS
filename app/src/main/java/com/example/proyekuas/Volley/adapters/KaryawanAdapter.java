@@ -79,7 +79,7 @@ public class KaryawanAdapter extends RecyclerView.Adapter<KaryawanAdapter.ViewHo
             holder.tvNama.setText(karyawan.getNama_karyawan());
             holder.tvNomorKaryawan.setText(karyawan.getNomor_karyawan());
             holder.tvRole.setText(karyawan.getRole());
-            holder.tvInfo.setText(karyawan.getUmur() + " - " + karyawan.getJenis_kelamin());
+            holder.tvInfo.setText(karyawan.getUmur() + " tahun - " + karyawan.getJenis_kelamin());
 
             holder.btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -1,7 +1,5 @@
 package com.example.proyekuas.Volley.models;
 
-import java.util.Date;
-
 public class Reservasi {
 
     private Long id;
@@ -9,9 +7,9 @@ public class Reservasi {
     private String room_type;
     private String checkIn;
     private String checkOut;
-    private float total_harga;
+    private Float total_harga;
 
-    public Reservasi (String nama, String room_type, String checkIn, String checkOut, float total_harga) {
+    public Reservasi (String nama, String room_type, String checkIn, String checkOut, Float total_harga) {
         this.nama = nama;
         this.room_type = room_type;
         this.checkIn = checkIn;
@@ -59,11 +57,11 @@ public class Reservasi {
         this.checkOut = checkOut;
     }
 
-    public float getTotal_harga() {
+    public Float getTotal_harga() {
         return total_harga;
     }
 
-    public void setTotal_harga(float total_harga) {
+    public void setTotal_harga(Float total_harga) {
         this.total_harga = total_harga;
     }
 }

@@ -77,7 +77,7 @@ public class ReservasiAdapter extends RecyclerView.Adapter<ReservasiAdapter.View
             holder.tvNama.setText(reservasi.getNama());
             holder.tvRoomType.setText(reservasi.getRoom_type());
             holder.tvTotal.setText("Rp. "+String.valueOf(reservasi.getTotal_harga()));
-            holder.tvCheckInOut.setText(reservasi.getCheckIn() + " - " + reservasi.getCheckOut());
+            holder.tvCheckInOut.setText(reservasi.getCheckIn() + " (Check-In)\n" + reservasi.getCheckOut()+" (Check-Out)");
         }
     }
 

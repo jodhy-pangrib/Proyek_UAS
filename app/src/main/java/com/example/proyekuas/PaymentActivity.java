@@ -150,14 +150,19 @@ public class PaymentActivity extends AppCompatActivity {
     }
     public void createReservasi() {
         setLoading(true);
-        String[] total = harga.getText().toString().trim().split(" ");
+
+        Float totalHarga = null;
+        if(!harga.getText().toString().trim().isEmpty()) {
+            String[] total = harga.getText().toString().trim().split(" ");
+            totalHarga = Float.parseFloat(total[1]);
+        }
 
         Reservasi reservasi = new Reservasi(
                 nama.getText().toString().trim(),
                 roomType.getText().toString().trim(),
                 checkin.getText().toString().trim(),
                 checkout.getText().toString().trim(),
-                Float.parseFloat(total[1])
+                totalHarga
         );
 
         // Membuat request baru untuk membuat data mahasiswa baru

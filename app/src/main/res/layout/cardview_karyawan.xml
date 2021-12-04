@@ -24,6 +24,12 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/tv_nomorKaryawan"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nomor Karyawan" />
 
             <TextView
                 android:id="@+id/tv_namaKaryawan"
@@ -35,25 +41,18 @@
                 android:text="Nama Karyawan" />
 
             <TextView
-                android:id="@+id/tv_info"
-                style="@style/TextAppearance.AppCompat.Caption"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Umur - Jenis Kelamin" />
-
-            <TextView
-                android:id="@+id/tv_nomorKaryawan"
-                style="@style/TextAppearance.AppCompat.Body2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nomor Karyawan" />
-
-            <TextView
                 android:id="@+id/tv_role"
                 style="@style/TextAppearance.AppCompat.Body2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Role" />
+
+            <TextView
+                android:id="@+id/tv_info"
+                style="@style/TextAppearance.AppCompat.Caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Umur - Jenis Kelamin" />
 
         </LinearLayout>
 
