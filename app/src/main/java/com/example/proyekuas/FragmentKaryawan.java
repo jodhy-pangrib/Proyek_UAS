@@ -32,6 +32,7 @@ import com.example.proyekuas.Volley.Method;
 import com.example.proyekuas.Volley.adapters.KaryawanAdapter;
 import com.example.proyekuas.Volley.api.KaryawanApi;
 import com.example.proyekuas.Volley.models.KaryawanResponse;
+import com.example.proyekuas.Volley.models.KaryawanResponseAll;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
@@ -43,8 +44,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FragmentKaryawan extends Fragment  {
-
-    public static final int LAUNCH_ADD_ACTIVITY = 123;
 
     private SwipeRefreshLayout srKaryawan;
     private KaryawanAdapter adapter;
@@ -88,10 +87,12 @@ public class FragmentKaryawan extends Fragment  {
             }
         });
 
-        FloatingActionButton fabAdd = view.findViewById(R.id.fab_add);
+        FloatingActionButton fabAdd = view.findViewById(R.id.fab_addKaryawan);
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(getContext(), AddEditKaryawan.class);
+                startActivityForResult(i, 123);
             }
         });
 
@@ -100,6 +101,12 @@ public class FragmentKaryawan extends Fragment  {
             @Override
             public void delete(long id) {
                 deleteKaryawan(id);
+            }
+            @Override
+            public void getId(long id) {
+                Intent i = new Intent(getContext(), AddEditKaryawan.class);
+                i.putExtra("id", id);
+                startActivityForResult(i,123);
             }
         });
         rvKaryawan.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -112,7 +119,7 @@ public class FragmentKaryawan extends Fragment  {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == LAUNCH_ADD_ACTIVITY && resultCode == Activity.RESULT_OK)
+        if (requestCode == 123 && resultCode == Activity.RESULT_OK)
             getAllKaryawan();
     }
 
@@ -123,7 +130,7 @@ public class FragmentKaryawan extends Fragment  {
             @Override public void onResponse(String response) {
                 Gson gson = new Gson();
                 /* Deserialiasai data dari response JSON dari API menjadi java object MahasiswaResponse menggunakan Gson */
-                KaryawanResponse karyawanResponse = gson.fromJson(response, KaryawanResponse.class);
+                KaryawanResponseAll karyawanResponse = gson.fromJson(response, KaryawanResponseAll.class);
 
                 adapter.setKaryawanList(karyawanResponse.getKaryawanList());
                 adapter.getFilter().filter(svKaryawan.getQuery());

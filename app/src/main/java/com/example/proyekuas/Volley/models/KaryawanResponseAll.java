@@ -4,10 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ReservasiResponse {
+public class KaryawanResponseAll {
     private String message;
 
-    private Reservasi reservasi;
+    @SerializedName("karyawan")
+    private List<Karyawan> karyawanList;
 
     public String getMessage() {
         return message;
@@ -17,11 +18,11 @@ public class ReservasiResponse {
         this.message = message;
     }
 
-    public Reservasi getReservasi() {
-        return reservasi;
+    public List<Karyawan> getKaryawanList() {
+        return karyawanList;
     }
 
-    public void setReservasi(Reservasi reservasi) {
-        this.reservasi = reservasi;
+    public void setKaryawanList(List<Karyawan> karyawanList) {
+        this.karyawanList = karyawanList;
     }
 }

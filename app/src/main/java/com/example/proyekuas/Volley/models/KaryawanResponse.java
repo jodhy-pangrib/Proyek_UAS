@@ -7,8 +7,7 @@ import java.util.List;
 public class KaryawanResponse {
     private String message;
 
-    @SerializedName("karyawan")
-    private List<Karyawan> karyawanList;
+    private Karyawan karyawan;
 
     public String getMessage() {
         return message;
@@ -18,11 +17,11 @@ public class KaryawanResponse {
         this.message = message;
     }
 
-    public List<Karyawan> getKaryawanList() {
-        return karyawanList;
+    public Karyawan getKaryawan() {
+        return karyawan;
     }
 
-    public void setKaryawanList(List<Karyawan> karyawanList) {
-        this.karyawanList = karyawanList;
+    public void setKaryawan(Karyawan karyawan) {
+        this.karyawan = karyawan;
     }
 }

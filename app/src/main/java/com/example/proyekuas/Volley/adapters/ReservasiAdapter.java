@@ -15,25 +15,24 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.proyekuas.AddEditKaryawan;
 import com.example.proyekuas.AddEditReservasi;
 import com.example.proyekuas.AdminHome;
-import com.example.proyekuas.Volley.Method;
 import com.example.proyekuas.R;
-import com.example.proyekuas.Volley.models.Karyawan;
+import com.example.proyekuas.Volley.Method;
+import com.example.proyekuas.Volley.models.Reservasi;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class KaryawanAdapter extends RecyclerView.Adapter<KaryawanAdapter.ViewHolder> implements Filterable {
-    private List<Karyawan> karyawanList, filteredKaryawanList;
+public class ReservasiAdapter extends RecyclerView.Adapter<ReservasiAdapter.ViewHolder> implements Filterable {
+    private List<Reservasi> reservasiList, filteredReservasiList;
     private Context context;
     private Method callback;
 
-    public KaryawanAdapter(List<Karyawan> karyawanList, Context context, Method callback) {
-        this.karyawanList = karyawanList;
-        filteredKaryawanList = new ArrayList<>(karyawanList);
+    public ReservasiAdapter(List<Reservasi> reservasiList, Context context, Method callback) {
+        this.reservasiList = reservasiList;
+        filteredReservasiList = new ArrayList<>(reservasiList);
         this.context = context;
         this.callback = callback;
     }
@@ -44,14 +43,14 @@ public class KaryawanAdapter extends RecyclerView.Adapter<KaryawanAdapter.ViewHo
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
                 String charSequenceString = charSequence.toString();
-                List<Karyawan> filtered = new ArrayList<>();
+                List<Reservasi> filtered = new ArrayList<>();
 
                 if (charSequenceString.isEmpty()) {
-                    filtered.addAll(karyawanList);
+                    filtered.addAll(reservasiList);
                 } else {
-                    for (Karyawan karyawan : karyawanList) {
-                        if (karyawan.getNama_karyawan().toLowerCase() .contains(charSequenceString.toLowerCase()))
-                            filtered.add(karyawan);
+                    for (Reservasi reservasi : reservasiList) {
+                        if (reservasi.getNama().toLowerCase() .contains(charSequenceString.toLowerCase()))
+                            filtered.add(reservasi);
                     }
                 }
 
@@ -61,8 +60,8 @@ public class KaryawanAdapter extends RecyclerView.Adapter<KaryawanAdapter.ViewHo
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                filteredKaryawanList.clear();
-                filteredKaryawanList.addAll((List<Karyawan>) filterResults.values);
+                filteredReservasiList.clear();
+                filteredReservasiList.addAll((List<Reservasi>) filterResults.values);
                 notifyDataSetChanged();
             }
         };
@@ -72,18 +71,18 @@ public class KaryawanAdapter extends RecyclerView.Adapter<KaryawanAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.cardview_karyawan, parent, false);
+        View view = inflater.inflate(R.layout.cardview_reservasi, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Karyawan karyawan = filteredKaryawanList.get(position);
-        if(karyawan != null) {
-            holder.tvNama.setText(karyawan.getNama_karyawan());
-            holder.tvNomorKaryawan.setText(karyawan.getNomor_karyawan());
-            holder.tvRole.setText(karyawan.getRole());
-            holder.tvInfo.setText(karyawan.getUmur() + " - " + karyawan.getJenis_kelamin());
+        Reservasi reservasi = filteredReservasiList.get(position);
+        if(reservasi != null) {
+            holder.tvNama.setText(reservasi.getNama());
+            holder.tvRoomType.setText(reservasi.getRoom_type());
+            holder.tvTotal.setText(String.valueOf(reservasi.getTotal_harga()));
+            holder.tvCheckInOut.setText(reservasi.getCheckIn() + " - " + reservasi.getCheckOut());
 
             holder.btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -91,22 +90,22 @@ public class KaryawanAdapter extends RecyclerView.Adapter<KaryawanAdapter.ViewHo
                     MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(context);
                     materialAlertDialogBuilder
                             .setTitle("Konfirmasi")
-                            .setMessage("Apakah anda yakin ingin menghapus data karyawan ini?")
+                            .setMessage("Apakah anda yakin ingin menghapus data reservasi ini?")
                             .setNegativeButton("Batal", null)
                             .setPositiveButton("Hapus", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    callback.delete(karyawan.getId());
+                                    callback.delete(reservasi.getId());
                                 }
                             })
                             .show();
                 }
             });
 
-            holder.cvKaryawan.setOnClickListener(new View.OnClickListener() {
+            holder.cvReservasi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    callback.getId(karyawan.getId());
+                    callback.getId(reservasi.getId());
                 }
             });
         }
@@ -114,28 +113,28 @@ public class KaryawanAdapter extends RecyclerView.Adapter<KaryawanAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return filteredKaryawanList.size();
+        return filteredReservasiList.size();
     }
 
-    public void setKaryawanList(List<Karyawan> karyawanList) {
-        this.karyawanList = karyawanList;
-        filteredKaryawanList = new ArrayList<>(karyawanList);
+    public void setReservasiList(List<Reservasi> reservasiList) {
+        this.reservasiList = reservasiList;
+        filteredReservasiList = new ArrayList<>(reservasiList);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvNama, tvInfo, tvNomorKaryawan, tvRole;
+        TextView tvNama, tvCheckInOut, tvRoomType, tvTotal;
         ImageButton btnDelete;
-        CardView cvKaryawan;
+        CardView cvReservasi;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvNama = itemView.findViewById(R.id.tv_namaKaryawan);
-            tvInfo = itemView.findViewById(R.id.tv_info);
-            tvNomorKaryawan = itemView.findViewById(R.id.tv_nomorKaryawan);
-            tvRole = itemView.findViewById(R.id.tv_role);
-            btnDelete = itemView.findViewById(R.id.btn_deleteKaryawan);
-            cvKaryawan = itemView.findViewById(R.id.cv_karyawan);
+            tvNama = itemView.findViewById(R.id.tv_nama);
+            tvCheckInOut = itemView.findViewById(R.id.tv_checkInOut);
+            tvRoomType = itemView.findViewById(R.id.tv_roomType);
+            tvTotal = itemView.findViewById(R.id.tv_totalHarga);
+            btnDelete = itemView.findViewById(R.id.btn_delete);
+            cvReservasi = itemView.findViewById(R.id.cv_reservasi);
         }
     }
 }

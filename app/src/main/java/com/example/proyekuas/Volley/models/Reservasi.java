@@ -4,18 +4,27 @@ import java.util.Date;
 
 public class Reservasi {
 
+    private Long id;
     private String nama;
     private String room_type;
-    private Date checkIn;
-    private Date checkOut;
+    private String checkIn;
+    private String checkOut;
     private float total_harga;
 
-    public Reservasi (String nama, String room_type, Date checkIn, Date checkOut, float total_harga) {
+    public Reservasi (String nama, String room_type, String checkIn, String checkOut, float total_harga) {
         this.nama = nama;
         this.room_type = room_type;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.total_harga = total_harga;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNama() {
@@ -34,19 +43,19 @@ public class Reservasi {
         this.room_type = room_type;
     }
 
-    public Date getCheckIn() {
+    public String getCheckIn() {
         return checkIn;
     }
 
-    public void setCheckIn(Date checkIn) {
+    public void setCheckIn(String checkIn) {
         this.checkIn = checkIn;
     }
 
-    public Date getCheckOut() {
+    public String getCheckOut() {
         return checkOut;
     }
 
-    public void setCheckOut(Date checkOut) {
+    public void setCheckOut(String checkOut) {
         this.checkOut = checkOut;
     }
 
