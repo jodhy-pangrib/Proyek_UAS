@@ -10,7 +10,7 @@ public class ActivityUtil {
 
     public ActivityUtil(Context context) { this.context = context; }
 
-    public void startMainProfil() {
+    public void startMainAddEditKaryawan() {
         context.startActivity(new Intent(context, AddEditKaryawan.class));
     }
 }

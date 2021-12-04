@@ -25,6 +25,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.proyekuas.UnitTesting.ActivityUtil;
+import com.example.proyekuas.UnitTesting.KaryawanPresenter;
+import com.example.proyekuas.UnitTesting.KaryawanView;
 import com.example.proyekuas.Volley.api.KaryawanApi;
 import com.example.proyekuas.Volley.models.Karyawan;
 import com.example.proyekuas.Volley.models.KaryawanResponse;
@@ -36,7 +39,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddEditKaryawan extends AppCompatActivity {
+public class AddEditKaryawan extends AppCompatActivity implements KaryawanView {
 
     private static final String[] JENIS_KELAMIN_LIST = new String[]{"Laki-laki",
             "Perempuan"};
@@ -49,6 +52,7 @@ public class AddEditKaryawan extends AppCompatActivity {
     private RequestQueue queue;
     private LinearLayout layoutLoading;
 
+    private KaryawanPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -179,10 +183,12 @@ public class AddEditKaryawan extends AppCompatActivity {
                         Toast.makeText(AddEditKaryawan.this,
                                 karyawanResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
+                        presenter.onKaryawanClicked();
                         Intent returnIntent = new Intent();
                         setResult(Activity.RESULT_OK, returnIntent);
                         finish();
                         setLoading(false);
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -225,6 +231,38 @@ public class AddEditKaryawan extends AppCompatActivity {
             }
         };
         queue.add(stringRequest);
+    }
+
+    //Code Unit Testing
+    @Override
+    public String getNamaKaryawan() { return etNama.getText().toString(); }
+    @Override
+    public void showNamaError(String message) { etNama.setError(message); }
+    @Override
+    public String getNomorKaryawan() { return etNoKaryawan.getText().toString(); }
+    @Override
+    public void showNomorKaryawanError(String message) { etNoKaryawan.setError(message); }
+    @Override
+    public String getUmurKaryawan() { return etUmur.getText().toString(); }
+    @Override
+    public void showUmurKaryawanError(String message) { etUmur.setError(message); }
+    @Override
+    public String getJenisKelamin() { return edJenisKelamin.getText().toString(); }
+    @Override
+    public void showJenisKelaminError(String message) { edJenisKelamin.setError(message); }
+    @Override
+    public String getRoleKaryawan() { return edRole.getText().toString(); }
+    @Override
+    public void showRoleKaryawanError(String message) { edRole.setError(message); }
+    @Override
+    public void startAddEditKaryawan() { new ActivityUtil(this).startMainAddEditKaryawan(); }
+    @Override
+    public void showAddEditKaryawanError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void showErrorResponse(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void updateKaryawan(long id){
