@@ -2,7 +2,6 @@ package com.example.proyekuas.Volley.adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.proyekuas.AddEditKaryawan;
-import com.example.proyekuas.AddEditReservasi;
-import com.example.proyekuas.AdminHome;
 import com.example.proyekuas.Volley.Method;
 import com.example.proyekuas.R;
 import com.example.proyekuas.Volley.models.Karyawan;

@@ -87,28 +87,8 @@ public class FragmentReservasi extends Fragment {
             }
         });
 
-        FloatingActionButton fabAdd = view.findViewById(R.id.fab_addReservasi);
-        fabAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getContext(), AddEditReservasi.class);
-                startActivityForResult(i, 123);
-            }
-        });
-
         RecyclerView rvReservasi = view.findViewById(R.id.rv_reservasi);
-        adapter = new ReservasiAdapter(new ArrayList<>(), getActivity(), new Method() {
-            @Override
-            public void delete(long id) {
-                deleteReservasi(id);
-            }
-            @Override
-            public void getId(long id) {
-                Intent i = new Intent(getContext(), AddEditReservasi.class);
-                i.putExtra("id", id);
-                startActivityForResult(i,123);
-            }
-        });
+        adapter = new ReservasiAdapter(new ArrayList<>(), getActivity());
         rvReservasi.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         rvReservasi.setAdapter(adapter);
 

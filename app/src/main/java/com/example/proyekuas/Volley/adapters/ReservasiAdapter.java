@@ -2,7 +2,6 @@ package com.example.proyekuas.Volley.adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.proyekuas.AddEditReservasi;
-import com.example.proyekuas.AdminHome;
 import com.example.proyekuas.R;
 import com.example.proyekuas.Volley.Method;
 import com.example.proyekuas.Volley.models.Reservasi;
@@ -28,13 +25,11 @@ import java.util.List;
 public class ReservasiAdapter extends RecyclerView.Adapter<ReservasiAdapter.ViewHolder> implements Filterable {
     private List<Reservasi> reservasiList, filteredReservasiList;
     private Context context;
-    private Method callback;
 
-    public ReservasiAdapter(List<Reservasi> reservasiList, Context context, Method callback) {
+    public ReservasiAdapter(List<Reservasi> reservasiList, Context context) {
         this.reservasiList = reservasiList;
         filteredReservasiList = new ArrayList<>(reservasiList);
         this.context = context;
-        this.callback = callback;
     }
 
     @Override
@@ -83,31 +78,6 @@ public class ReservasiAdapter extends RecyclerView.Adapter<ReservasiAdapter.View
             holder.tvRoomType.setText(reservasi.getRoom_type());
             holder.tvTotal.setText(String.valueOf(reservasi.getTotal_harga()));
             holder.tvCheckInOut.setText(reservasi.getCheckIn() + " - " + reservasi.getCheckOut());
-
-            holder.btnDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(context);
-                    materialAlertDialogBuilder
-                            .setTitle("Konfirmasi")
-                            .setMessage("Apakah anda yakin ingin menghapus data reservasi ini?")
-                            .setNegativeButton("Batal", null)
-                            .setPositiveButton("Hapus", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    callback.delete(reservasi.getId());
-                                }
-                            })
-                            .show();
-                }
-            });
-
-            holder.cvReservasi.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    callback.getId(reservasi.getId());
-                }
-            });
         }
     }
 
@@ -123,8 +93,6 @@ public class ReservasiAdapter extends RecyclerView.Adapter<ReservasiAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvNama, tvCheckInOut, tvRoomType, tvTotal;
-        ImageButton btnDelete;
-        CardView cvReservasi;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -133,8 +101,6 @@ public class ReservasiAdapter extends RecyclerView.Adapter<ReservasiAdapter.View
             tvCheckInOut = itemView.findViewById(R.id.tv_checkInOut);
             tvRoomType = itemView.findViewById(R.id.tv_roomType);
             tvTotal = itemView.findViewById(R.id.tv_totalHarga);
-            btnDelete = itemView.findViewById(R.id.btn_delete);
-            cvReservasi = itemView.findViewById(R.id.cv_reservasi);
         }
     }
 }
