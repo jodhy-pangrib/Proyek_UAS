@@ -183,7 +183,7 @@ public class AddEditKaryawan extends AppCompatActivity implements KaryawanView {
                         Toast.makeText(AddEditKaryawan.this,
                                 karyawanResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
-                        presenter.onKaryawanClicked();
+//                        presenter.onKaryawanClicked();
                         Intent returnIntent = new Intent();
                         setResult(Activity.RESULT_OK, returnIntent);
                         finish();
