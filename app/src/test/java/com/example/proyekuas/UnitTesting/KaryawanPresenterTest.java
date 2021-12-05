@@ -32,6 +32,7 @@ public class KaryawanPresenterTest {
         System.out.println("Nama : " + view.getNamaKaryawan());
         presenter.onKaryawanClicked();
         verify(view).showNamaError("Nama tidak boleh kosong");
+        System.out.println("qwoeubqwid");
     }
 
     @Test
